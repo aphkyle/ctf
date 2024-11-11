@@ -9,7 +9,7 @@
 from Crypto.Cipher import AES  
 from Crypto.Util.Padding import pad, unpad  
 from Crypto.Random import get_random_bytes  
-BLOCK_SIZE = 16 \# Bytes
+BLOCK_SIZE = 16 # Bytes
 
 key = get_random_bytes(BLOCK_SIZE)  
 cipher = AES.new(key, AES.MODE_ECB)  
@@ -36,7 +36,7 @@ import os
 import requests  
 from Crypto.Cipher import AES  
 import hashlib  
-\# WARNING: Decompyle incomplete  
+# WARNING: Decompyle incomplete  
 ```
 Pycdc got an error `Unsupported opcode: CALL_INTRINSIC_1 (243)`  
 Then we try pycdas that returns us the bytecode and dump it to chatgpt4o  
@@ -86,32 +86,32 @@ Getting this flag: `hkcert24{y0u_c4n_h00k_func710ns_t0_35c4p3_fr0m_r3v3r5e_3n9e3
 # web/Custom Web Server (1)  
 Analyzing `server.c` this function seems to be vulnerable
 ```c
-FileWithSize \*read\_file(char \*filename) {  
-    if (\!ends\_with(filename, ".html") && \!ends\_with(filename, ".png") && \!ends\_with(filename, ".css") && \!ends\_with(filename, ".js")) return NULL;
+FileWithSize *read_file(char *filename) {
+    if (!ends_with(filename, ".html") && !ends_with(filename, ".png") && !ends_with(filename, ".css") && !ends_with(filename, ".js")) return NULL;
 
-    char real\_path\[BUFFER\_SIZE\];  
-    snprintf(real\_path, sizeof(real\_path), "public/%s", filename);
+    char real_path[BUFFER_SIZE];
+    snprintf(real_path, sizeof(real_path), "public/%s", filename);
 
-    FILE \*fd \= fopen(real\_path, "r");  
-    if (\!fd) return NULL;
+    FILE *fd = fopen(real_path, "r");
+    if (!fd) return NULL;
 
-    fseek(fd, 0, SEEK\_END);  
-    long filesize \= ftell(fd);  
-    fseek(fd, 0, SEEK\_SET);
+    fseek(fd, 0, SEEK_END);
+    long filesize = ftell(fd);
+    fseek(fd, 0, SEEK_SET);
 
-    char \*content \= malloc(filesize \+ 1);  
-    if (\!content) return NULL;
+    char *content = malloc(filesize + 1);
+    if (!content) return NULL;
 
-    fread(content, 1, filesize, fd);  
-    content\[filesize\] \= '\\0';
+    fread(content, 1, filesize, fd);
+    content[filesize] = '\0';
 
     fclose(fd);
 
-    FileWithSize \*file \= malloc(sizeof(FileWithSize));  
-    file\-\>content \= content;  
-    file\-\>size \= filesize;  
-   
-    return file;  
+    FileWithSize *file = malloc(sizeof(FileWithSize));
+    file->content = content;
+    file->size = filesize;
+ 
+    return file;
 }
 ```
 It checks the whether the filenames are ending with safe file extension but not opening the file with `filename`  
