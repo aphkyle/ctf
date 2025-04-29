@@ -13,7 +13,7 @@ Let's try doing so in the challenge
 
 Initially pasting the response will result in a negative response `HAAACK *bonk*`
 
-We tried translating the prompt with modifications that the instructions should be in English to German and the result is following:
+We tried translating (the prompt with modifications that the instructions should be in English) to German and the result is following:
 
 ````
 BEGIN
